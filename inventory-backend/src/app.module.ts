@@ -2,8 +2,10 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ProductsModule } from './products/products.module';
+import { ProductModule } from './product/product.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { GoodsInModule } from './goods-in/goods-in.module';
+import { GoodsOutModule } from './goods-out/goods-out.module';
 
 @Module({
   imports: [
@@ -24,7 +26,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         synchronize: true,
       }),
     }),
-    ProductsModule,
+    ProductModule,
+    GoodsInModule,
+    GoodsOutModule,
   ],
   controllers: [AppController],
   providers: [AppService],
