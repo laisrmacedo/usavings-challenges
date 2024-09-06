@@ -15,5 +15,5 @@ export class Product {
   quantity: number;
 
   @Column()
-  expirationDate: Date;  // data de validade
+  expirationDate: string;  // data de validade
 }
