@@ -5,15 +5,16 @@ export class Product {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ unique: true })
   name: string;
 
-  @Column()
+  @Column('decimal', { precision: 10, scale: 2, unique: true })
   price: number;
 
   @Column()
   quantity: number;
 
   @Column()
-  expirationDate: string;  // data de validade
+  shelf_life: number;
 }
+

@@ -4,31 +4,31 @@ import { Repository } from 'typeorm'; // serve para manipular os produtos no ban
 import { Product } from './product.entity';
 
 @Injectable()
-export class ProductsService {
+export class ProductService {
   constructor(
     @InjectRepository(Product)
-    private productsRepository: Repository<Product>,
+    private productRepository: Repository<Product>,
   ) {}
 
   findAll(): Promise<Product[]> {
-    return this.productsRepository.find();
+    return this.productRepository.find();
   }
 
   findOne(id: number): Promise<Product> {
-    return this.productsRepository.findOneBy({ id });
+    return this.productRepository.findOneBy({ id });
   }
 
   create(product: Product): Promise<Product> {
-    return this.productsRepository.save(product);
+    return this.productRepository.save(product);
   }
 
   async update(id: number, updatedProduct: Partial<Product>): Promise<Product> {
-    await this.productsRepository.update(id, updatedProduct);
+    await this.productRepository.update(id, updatedProduct);
     return this.findOne(id);
   }
 
   async remove(id: number): Promise<void> {
-    await this.productsRepository.delete(id);
+    await this.productRepository.delete(id);
   }
 }
 
