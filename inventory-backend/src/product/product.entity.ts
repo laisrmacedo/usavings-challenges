@@ -1,4 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { GoodsIn } from '../goods-in/goods-in.entity';
+import { GoodsOut } from '../goods-out/goods-out.entity';
+import { Stock } from '../stock/stock.entity';
 
 @Entity()
 export class Product {
@@ -12,9 +15,20 @@ export class Product {
   price: number;
 
   @Column()
-  quantity: number;
+  unit: string;
 
   @Column()
   shelf_life: number;
-}
 
+  // Relacionamento com GoodsIn
+  @OneToMany(() => GoodsIn, goodsIn => goodsIn.product)
+  goodsIn: GoodsIn[];
+
+  // Relacionamento com GoodsOut
+  @OneToMany(() => GoodsOut, goodsOut => goodsOut.product)
+  goodsOut: GoodsOut[];
+
+  // Relacionamento com Stock
+  @OneToMany(() => Stock, stock => stock.product)
+  stock: Stock[];
+}
