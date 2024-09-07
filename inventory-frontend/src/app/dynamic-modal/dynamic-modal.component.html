@@ -1,8 +1,29 @@
+<h1 mat-dialog-title class="modal-title">
+  {{ data.type === 'register' ? 'Cadastrar Item' : 'Confirmar Deleção' }}
+</h1>
 
-  <h1 mat-dialog-title>Dynamic Modal</h1>
-  <div mat-dialog-content>
-    <p>{{data.content}}</p>
-  </div>
-  <div mat-dialog-actions>
-    <button mat-button (click)="close()">Close</button>
-  </div>
+<div mat-dialog-content  class="modal-content">
+    <span>
+      <label for="name">Nome</label>
+      <input type="text" name="name" id="name"/>
+    </span>
+    <span>
+      <label for="price">Preco Unitário (R$)</label>
+      <input type="number" name="price" id="price"/>
+    </span>
+    <span>
+      <label for="unit">Unidade</label>
+      <input type="text" name="unit" id="unit"/>
+    </span>
+    <span>
+      <label for="shelf-life">Validade</label>
+      <input type="number" name="shelf-life" id="shelf-life"/>
+    </span>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">Cancelar</button>
+  <ng-container *ngIf="data?.type === 'register'">
+    <button mat-button (click)="closeDialog()">Cadastrar</button>
+  </ng-container>
+</div> 

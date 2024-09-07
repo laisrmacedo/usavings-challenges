@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { DynamicModalComponent } from '../dynamic-modal/dynamic-modal.component';
-import { MatDialog } from '@angular/material/dialog';
+import { DynamicModalService } from '../dynamic-modal/dynamic-modal.service';
 
 @Component({
   selector: 'app-products-page',
@@ -10,17 +9,9 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrl: './products-page.component.css'
 })
 export class ProductsPageComponent {
-  constructor(public dialog: MatDialog) {}
+  constructor(private dynamicModalService: DynamicModalService) {}
 
-  openDialog(data: any): void {
-    const dialogRef = this.dialog.open(DynamicModalComponent, {
-      width: '250px',
-      panelClass: 'custom-modal',
-      data: { content: data }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+  openRegisterDialog(): void {
+    this.dynamicModalService.openRegisterModal();
   }
 }

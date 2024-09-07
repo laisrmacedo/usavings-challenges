@@ -1,42 +1,31 @@
 <div class="container">
   <div class="table-area">
-  <table>
-    <thead>
-      <tr>
-        <th>Lote</th>
-        <th>Nome</th>
-        <th>Preço Uni. (R$)</th>
-        <th>Unidade</th>
-        <th>Em estoque</th>
-        <th>Validade (Dias)</th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>10/09</td>
-        <td>Leite</td>
-        <td>8,00</td>
-        <td>1 L</td>
-        <td>15</td>
-        <td>4</td>
-        <td><span class="edit-btn">Editar</span></td>
-        <td><span class="delete-btn">Deletar</span></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<div class="new-product-area">
-  <input
-  type="text"
-  placeholder="Nome"
-  />
-  <input
-  type="number"
-  placeholder="Preço Unitário"
-  />
-  <button mat-button (click)="openDialog('Conteúdo A')">Abrir Modal com Conteúdo A</button>
-  <!-- <button class="add-btn">Cadastrar</button> -->
-</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Preço Uni. (R$)</th>
+          <th>Unidade</th>
+          <th>Validade (Dias)</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Leite</td>
+          <td>8,00</td>
+          <td>L</td>
+          <td>4</td>
+          <td><span class="edit-btn">Editar</span></td>
+          <td><span class="delete-btn">Deletar</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="new-product-area">
+    <input type="text" placeholder="Nome" />
+    <input type="number" placeholder="Preço Unitário" />
+    <button mat-button (click)="openRegisterDialog()">Cadastrar Item</button> 
+  </div>
 </div>

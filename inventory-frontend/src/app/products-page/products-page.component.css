@@ -21,7 +21,7 @@ table{
 thead th{ 
   border: none;
   padding: 8px 0;
-  width: calc(100% / 8);
+  width: calc(100% / 6);
 }
 tbody td{ 
   border-top: 1px solid rgb(224, 222, 222);
