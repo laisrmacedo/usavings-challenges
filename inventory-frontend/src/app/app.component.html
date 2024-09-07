@@ -1,4 +1,4 @@
-<div class="app-content">
+<div class="app-container">
   <header>
     <figure>
       <img src="../assets/logo.png" alt="logo" />
@@ -8,9 +8,18 @@
       <span>ADMIN</span>
     </div>
   </header>
-  <main>
-
-  </main>
+  <div>
+    <nav>
+      <ul>
+        <li (click)="navigate('/produtos')">Produtos</li>
+        <li (click)="navigate('/entradas')">Entradas</li>
+        <li (click)="navigate('/saidas')">Saidas</li>
+      </ul>
+    </nav>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </div>
   <footer>
     <h5>Criado por Laís Macedo</h5>
     <p>© 2024 | Todos os direitos reservados.</p>
