@@ -21,9 +21,9 @@
     </span>
 </div>
 
-<div mat-dialog-actions>
-  <button mat-button (click)="closeDialog()">Cancelar</button>
+<div class="model-actions" mat-dialog-actions>
+  <button class="cancel-btn" mat-button (click)="closeDialog()">Cancelar</button>
   <ng-container *ngIf="data?.type === 'register'">
-    <button mat-button (click)="closeDialog()">Cadastrar</button>
+    <button class="add-btn" mat-button (click)="closeDialog()">Cadastrar</button>
   </ng-container>
 </div> 

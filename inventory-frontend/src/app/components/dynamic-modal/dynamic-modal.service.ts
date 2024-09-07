@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { DynamicModalComponent } from '../dynamic-modal/dynamic-modal.component';
+import { DynamicModalComponent } from './dynamic-modal.component';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +10,7 @@ export class DynamicModalService {
 
   openRegisterModal(): void {
     this.dialog.open(DynamicModalComponent, {
-      width: '400px',
+      width: '600px',
       panelClass: 'custom-modal',
       data: { type: 'register' }
     });
