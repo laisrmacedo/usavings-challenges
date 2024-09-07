@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GoodsOutPageComponent } from './goods-out-page.component';
+import { OverviewPageComponent } from './overview-page.component';
 
-describe('GoodsOutPageComponent', () => {
-  let component: GoodsOutPageComponent;
-  let fixture: ComponentFixture<GoodsOutPageComponent>;
+describe('OverviewPageComponent', () => {
+  let component: OverviewPageComponent;
+  let fixture: ComponentFixture<OverviewPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GoodsOutPageComponent]
+      imports: [OverviewPageComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(GoodsOutPageComponent);
+    fixture = TestBed.createComponent(OverviewPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
