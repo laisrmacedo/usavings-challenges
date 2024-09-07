@@ -17,15 +17,13 @@
           <td>8,00</td>
           <td>L</td>
           <td>4</td>
-          <td><span class="edit-btn">Editar</span></td>
-          <td><span class="delete-btn">Deletar</span></td>
+          <td><button class="edit-btn">Editar</button></td>
+          <td><button class="delete-btn">Deletar</button></td>
         </tr>
       </tbody>
     </table>
   </div>
   <div class="new-product-area">
-    <input type="text" placeholder="Nome" />
-    <input type="number" placeholder="Preço Unitário" />
-    <button mat-button (click)="openRegisterDialog()">Cadastrar Item</button> 
+    <button class="add-btn" mat-button (click)="openRegisterDialog()">Cadastrar Produto</button> 
   </div>
 </div>

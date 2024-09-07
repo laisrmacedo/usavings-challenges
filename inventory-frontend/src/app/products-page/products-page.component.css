@@ -10,7 +10,9 @@
 }
 .new-product-area{
   height: 10%;
-  background-color: var(--my-gray);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 table{
@@ -27,32 +29,5 @@ tbody td{
   border-top: 1px solid rgb(224, 222, 222);
   padding: 16px 0;
   text-align: center;
-}
-
-.edit-btn{
-  background-color: var(--my-blue-0);
-  border: 1px solid var(--my-blue-1);
-  border-radius: 4px;
-  color: var(--my-blue-1);
-  text-align: center;
-  padding: 4px 10px;
-}
-
-.delete-btn{
-  background-color: var(--my-red-0);
-  border: 1px solid var(--my-red-1);
-  border-radius: 4px;
-  color: var(--my-red-1);
-  text-align: center;
-  padding: 4px 10px;
-}
-
-.add-btn{
-  background-color: var(--my-green-0);
-  border: 1px solid var(--my-green-1);
-  border-radius: 4px;
-  color: var(--my-green-1);
-  text-align: center;
-  padding: 4px 10px;
 }
 
