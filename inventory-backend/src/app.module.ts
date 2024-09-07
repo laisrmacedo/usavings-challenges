@@ -6,6 +6,7 @@ import { ProductModule } from './product/product.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { GoodsInModule } from './goods-in/goods-in.module';
 import { GoodsOutModule } from './goods-out/goods-out.module';
+import { StockModule } from './stock/stock.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { GoodsOutModule } from './goods-out/goods-out.module';
     ProductModule,
     GoodsInModule,
     GoodsOutModule,
+    StockModule,
   ],
   controllers: [AppController],
   providers: [AppService],
