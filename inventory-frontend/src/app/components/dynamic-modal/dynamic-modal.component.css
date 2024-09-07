@@ -1,0 +1,31 @@
+.modal-title{
+  /* color: yellow; */
+  font-size: 20px;
+  text-align: center;
+}
+
+.modal-content{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal-content > span{
+  display: flex;
+  flex-direction: column;
+}
+
+.model-actions{
+  display: flex;
+  justify-content: center;
+}
+
+.mat-mdc-button:not(:disabled){
+  background-color: rgb(229, 228, 228);
+  color: var(--my-black);
+}
+
+.mat-mdc-dialog-actions .mat-button-base+.mat-button-base, .mat-mdc-dialog-actions .mat-mdc-button-base+.mat-mdc-button-base{
+  background-color: var(--my-green-1);
+  color: var(--my-white);
+}

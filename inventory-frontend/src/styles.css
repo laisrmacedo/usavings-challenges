@@ -77,3 +77,10 @@ button{
   border: none;
   padding: 8px 0;
 }
+
+.cancel-btn{
+  background-color: rgb(229, 228, 228);
+  color: var(--my-black);
+  border: none;
+  padding: 8px 0;
+}
