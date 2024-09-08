@@ -4,8 +4,6 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductModule } from './product/product.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { GoodsInModule } from './goods-in/goods-in.module';
-import { GoodsOutModule } from './goods-out/goods-out.module';
 import { StockModule } from './stock/stock.module';
 
 @Module({
@@ -28,8 +26,6 @@ import { StockModule } from './stock/stock.module';
       }),
     }),
     ProductModule,
-    GoodsInModule,
-    GoodsOutModule,
     StockModule,
   ],
   controllers: [AppController],

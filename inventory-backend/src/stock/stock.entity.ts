@@ -13,8 +13,11 @@ export class Stock {
   @Column()
   quantity: number;
 
-  @Column()
-  expiration_date: Date;
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  production_date: Date;
+
+  @Column({ type: 'timestamp',  nullable: true  })
+  due_date: Date;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;
