@@ -12,12 +12,12 @@
         </tr>
       </thead>
       <tbody>
-          <tr *ngFor="let productData of productsData$">
+          <tr *ngFor="let productData of productsData">
             <td>{{productData.name}}</td>
             <td>{{productData.price}}</td>
             <td>{{productData.unit}}</td>
             <td>{{productData.shelf_life}}</td>
-            <td><button class="edit-btn" (click)="openEditDialog('edit', productData.id)">Editar</button></td>
+            <td><button class="edit-btn" (click)="openEditDialog('edit', productData)">Editar</button></td>
             <td><button class="delete-btn" (click)="openDeleteDialog('delete', productData.id)">Deletar</button></td>
           </tr>
       </tbody>

@@ -5,24 +5,21 @@ import { Product } from '../interfaces/interfaces';
 import { MatDialog } from '@angular/material/dialog';
 import { DynamicModalComponent } from '../components/dynamic-modal/dynamic-modal.component';
 
+type Entity = 'product' | 'stock'
+
 @Injectable({
   providedIn: 'root'
 })
 export class GlobalService{
-  apiUrl = 'http://localhost:3000/product'
+  apiUrl = 'http://localhost:3000'
 
-  private productsSubject = new BehaviorSubject<Product[]>([]);
-  productsData$: Observable<Product[]> = this.productsSubject.asObservable();
-
-  // productsData: Product[] = [{id:0, name: '', price: 0, unit:'', shelf_life: 0}]
+  productsData: Product[] = [{id:0, name: '', price: 0, unit: '', shelf_life: 0}]
 
   constructor(
     private http: HttpClient,
     private dialog: MatDialog,
   ) { }
-
-
-
+  
   //Modal
   openRegisterModal(type: string): void {
     this.dialog.open(DynamicModalComponent, {
@@ -31,7 +28,7 @@ export class GlobalService{
       data: { type }
     });
   }
-
+  
   openEditModal(type: string, product: Product): void {
     this.dialog.open(DynamicModalComponent, {
       width: '600px',
@@ -39,40 +36,37 @@ export class GlobalService{
       data: { type, product }
     });
   }
-
-  openDeleteModal(type: string, id: string): void {
+  
+  openDeleteModal(type: string, id: number): void {
     this.dialog.open(DynamicModalComponent, {
       width: '600px',
       panelClass: 'custom-modal',
       data: { type, id }
     });
   }
-
+  
   //Products
-  getAllProducts(): Observable<Product[]>{
-    return this.http.get<Product[]>(this.apiUrl)
+  getAll(path: string){
+    return this.http.get<Product[]>(`${this.apiUrl}/${path}`)
   }
 
-  // this.http.get<Product[]>(this.apiUrl).subscribe(products => {
-  //   this.productsSubject.next(products);
-  // });
   
-  getProduct(id: string): Observable<Product>{
-    return this.http.get<Product>(`${this.apiUrl}/${id}`)
+  get(id: number, path: string): Observable<Product>{
+    return this.http.get<Product>(`${this.apiUrl}/${path}/${id}`)
   }
   
-  postProduct(product: Product): Observable<Product>{
-    return this.http.post<Product>(this.apiUrl, product)
+  post(product: Product, path: string): Observable<Product>{
+    return this.http.post<Product>(`${this.apiUrl}/${path}`, product)
   }
   
-  updateProduct(id: string, product: Product): Observable<Product>{
+  update(id: number, product: Product, path: string): Observable<Product>{
     const filteredProduct = Object.fromEntries(
       Object.entries(product).filter(([key, value]) => value !== '')
     );
-    return this.http.put<Product>(`${this.apiUrl}/${id}`, filteredProduct)
+    return this.http.put<Product>(`${this.apiUrl}/${path}/${id}`, filteredProduct)
   }
   
-  deleteProduct(id: string): Observable<any>{
-    return this.http.delete(`${this.apiUrl}/${id}`)
+  delete(id: number, path: string): Observable<any>{
+    return this.http.delete(`${this.apiUrl}/${path}/${id}`)
   }
 }

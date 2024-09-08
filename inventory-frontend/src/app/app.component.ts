@@ -3,6 +3,8 @@ import { RouterOutlet } from '@angular/router';
 import { Router } from '@angular/router';
 import { GlobalService } from './services/global.service';
 
+const isClientSide = () => typeof window !== 'undefined';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -17,30 +19,27 @@ export class AppComponent implements OnInit{
     private globalService: GlobalService
   ) {}
   
-  toChangePage(path: string, activePage: number){
-    this.navigate(path)   
-    this.setActive(activePage) 
-  }
-  
   navigate(path: string) {
     this.router.navigate([path]);
+    this.setActive(path)
   }
-
-  activePage: number = 1;
-
-  setActive(itemNumber: number) {
-    console.log(itemNumber)
-    this.activePage = itemNumber; // Atualiza o item ativo com o número do item clicado
+  
+  activePage: string = ''
+  
+  setActive(path: string) {
+    this.activePage = path;
   }
-
+  
   ngOnInit(): void {
-    this.globalService.getAllProducts().subscribe(
+    this.activePage = isClientSide() ? window.location.pathname : '';
+
+    this.globalService.getAll('product').subscribe(
       (res:any) => {
-        this.globalService.productsData$ = res
+        this.globalService.productsData = res
       }
     )
 
-    console.log(this.globalService.productsData$)
+    console.log("app ts", this.globalService.productsData)
   }
 }
 
