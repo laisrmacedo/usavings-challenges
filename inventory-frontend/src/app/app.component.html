@@ -10,11 +10,9 @@
   </header>
   <div>
     <nav>
-      <ul>
-        <li (click)="navigate('/visao-geral')">Visão Geral</li>
-        <li (click)="navigate('/produtos')">Produtos</li>
-        <li (click)="navigate('/gerenciamento')">Gerenciamento</li>
-      </ul>
+        <span [class.active]="activePage === 1" (click)="toChangePage('/visao-geral', 1)">Visão Geral</span>
+        <span [class.active]="activePage === 2" (click)="toChangePage('/gerenciamento', 2)">Gerenciamento</span>
+        <span [class.active]="activePage === 3" (click)="toChangePage('/produtos', 3)">Catálogo</span>
     </nav>
     <main>
       <router-outlet></router-outlet>

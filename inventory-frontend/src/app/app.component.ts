@@ -17,8 +17,20 @@ export class AppComponent implements OnInit{
     private globalService: GlobalService
   ) {}
   
+  toChangePage(path: string, activePage: number){
+    this.navigate(path)   
+    this.setActive(activePage) 
+  }
+  
   navigate(path: string) {
     this.router.navigate([path]);
+  }
+
+  activePage: number = 1;
+
+  setActive(itemNumber: number) {
+    console.log(itemNumber)
+    this.activePage = itemNumber; // Atualiza o item ativo com o número do item clicado
   }
 
   ngOnInit(): void {
