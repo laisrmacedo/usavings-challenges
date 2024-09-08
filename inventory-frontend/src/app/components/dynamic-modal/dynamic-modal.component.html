@@ -1,7 +1,7 @@
 <!-- Formulário para cadastro de produtos no catálogo -->
-<ng-container *ngIf="data?.type === 'register'">
+<ng-container *ngIf="data?.type === 'register-product'">
   <h1 mat-dialog-title class="modal-title">Cadastrar Produto</h1>
-  <form [formGroup]="createProductForm" (ngSubmit)="onSubmit('product')">
+  <form [formGroup]="createProductForm" (ngSubmit)="onSubmitProduct()">
     <div mat-dialog-content class="modal-content">
       <span>
         <label for="name">Nome</label>
@@ -31,85 +31,13 @@
 </ng-container>
 
 <!-- Formulário para editar um produtos no catálogo -->
-<ng-container *ngIf="data?.type === 'edit'">
+<ng-container *ngIf="data?.type === 'edit-product'">
   <h1 mat-dialog-title class="modal-title">Editar Produto</h1>
-  <form [formGroup]="editProductForm" (ngSubmit)="onEdit(data.product.id, 'product')">
+  <form [formGroup]="editProductForm" (ngSubmit)="onEditProduct(data.product.id)">
     <div mat-dialog-content class="modal-content">
       <span>
         <label for="name">Nome</label>
         <input type="text" name="name" id="name" disabled placeholder={{data.product.name}} />
-      </span>
-      <span>
-        <label for="price">Preco Unitário (R$)</label>
-        <input type="number" name="price" id="price" formControlName="price" placeholder={{data.product.price}}/>
-      </span>
-      <span>
-        <label for="unit">Unidade</label>
-        <select formControlName="unit">
-          <option [ngValue]="null" disabled>{{data.product.unit}}</option>
-          <option style="color: white;" *ngFor="let unit of units" [ngValue]="unit">{{unit}}</option>
-        </select>
-      </span>
-      <span>
-        <label for="shelf-_ife">Validade</label>
-        <input type="number" name="shelf-life" id="shelf_life" formControlName="shelf_life" placeholder={{data.product.shelf_life}}/>
-      </span>
-    </div>
-    <div class="model-actions" mat-dialog-actions>
-      <button class="cancel-btn" mat-button (click)="closeDialog()">Cancelar</button>
-      <button type="submit" class="edit-btn" mat-button (click)="onEdit(data.product.id, 'product')">Editar</button>
-    </div>
-  </form>
-</ng-container>
-
-<!-- Confirmação de Deleção -->
-<ng-container *ngIf="data?.type === 'delete'">
-  <div mat-dialog-content class="modal-content">
-    <p>Tem certeza de que deseja excluir este item?</p>
-  </div>
-
-  <div class="model-actions" mat-dialog-actions>
-    <button class="cancel-btn" mat-button (click)="closeDialog()">Cancelar</button>
-    <button class="delete-btn" mat-button (click)="onDelete(data.id, 'product')">Deletar</button>
-  </div>
-</ng-container>
-
-<!-- Formulário para registro de produtos no estoque -->
-<ng-container *ngIf="data?.type === 'register-stock'">
-  <h1 mat-dialog-title class="modal-title">Registrar Produção</h1>
-  <form [formGroup]="createProductForm" (ngSubmit)="onSubmit('stock')">
-    <div mat-dialog-content class="modal-content">
-      <span>
-        <label for="name">Nome *</label>
-        <select formControlName="name">
-          <option [ngValue]="null" disabled>Selecione um produto</option>
-          <option style="color: white;" *ngFor="let name of names" [ngValue]="name">{{name}}</option>
-        </select>
-      </span>
-      <span>
-        <label for="quantity">Quantidade *</label>
-        <input type="number" name="quantity" id="quantity" formControlName="quantity"  placeholder="Digite a quantidade"/>
-      </span>
-      <span>
-        <label for="expiration_date">Data de Fabricação (Opcional) </label>
-        <input type="date" name="expiration_date" id="expiration_date" formControlName="expiration_date"/>
-      </span>
-    </div>
-    <div class="model-actions" mat-dialog-actions>
-      <button class="cancel-btn" mat-button (click)="closeDialog()">Cancelar</button>
-      <button type="submit" class="add-btn" mat-button (click)="onSubmit('stock')">Registrar</button>
-    </div>
-  </form>
-</ng-container>
-
-<!-- Formulário para editar um produtos no catálogo -->
-<ng-container *ngIf="data?.type === 'edit-stock'">
-  <h1 mat-dialog-title class="modal-title">Editar Produção</h1>
-  <form [formGroup]="editProductForm" (ngSubmit)="onEdit(data.product.id, 'stock')">
-    <div mat-dialog-content class="modal-content">
-      <span>
-        <label for="name">Nome</label>
-        <input type="text" name="name" id="name" placeholder={{data.product.name}} />
       </span>
       <span>
         <label for="price">Preco Unitário (R$)</label>
@@ -135,6 +63,79 @@
 </ng-container>
 
 <!-- Confirmação de Deleção -->
+<ng-container *ngIf="data?.type === 'delete-product'">
+  <div mat-dialog-content class="modal-content">
+    <p>Tem certeza de que deseja excluir este item?</p>
+  </div>
+
+  <div class="model-actions" mat-dialog-actions>
+    <button class="cancel-btn" mat-button (click)="closeDialog()">Cancelar</button>
+    <button class="delete-btn" mat-button (click)="onDeleteProduct(data.id)">Deletar</button>
+  </div>
+</ng-container>
+
+<!-- ------------------------------ -->
+<!-- ------------------------------ -->
+<!-- ------------------------------ -->
+<!-- ------------------------------ -->
+<!-- ------------------------------ -->
+<!-- ------------------------------ -->
+<!-- ------------------------------ -->
+
+<!-- Formulário para registro de produtos no estoque -->
+<ng-container *ngIf="data?.type === 'register-stock'">
+  <h1 mat-dialog-title class="modal-title">Registrar Produção</h1>
+  <form [formGroup]="createStockForm" (ngSubmit)="onSubmitStock()">
+    <div mat-dialog-content class="modal-content">
+      <span>
+        <label for="name">Nome *</label>
+        <select formControlName="name">
+          <option [ngValue]="null" disabled>Selecione um produto</option>
+          <option style="color: white;" *ngFor="let name of names" [ngValue]="name">{{name}}</option>
+        </select>
+      </span>
+      <span>
+        <label for="quantity">Quantidade *</label>
+        <input type="number" name="quantity" id="quantity" formControlName="quantity"  placeholder="Digite a quantidade"/>
+      </span>
+      <span>
+        <label for="production_date">Data de Fabricação (Opcional) </label>
+        <input type="date" [(ngModel)]="defaultProductionDate"  name="production_date" id="production_date" formControlName="production_date"/>
+      </span>
+    </div>
+    <div class="model-actions" mat-dialog-actions>
+      <button class="cancel-btn" mat-button (click)="closeDialog()">Cancelar</button>
+      <button type="submit" class="add-btn" mat-button>Registrar</button>
+    </div>
+  </form>
+</ng-container>
+
+<!-- Formulário para editar um produtos no catálogo -->
+<ng-container *ngIf="data?.type === 'edit-stock'">
+  <h1 mat-dialog-title class="modal-title">Editar Item da Produção</h1>
+  <form [formGroup]="editStockForm" (ngSubmit)="onEditStock(data.item.id)">
+    <div mat-dialog-content class="modal-content">
+      <span>
+        <label for="name">Nome</label>
+        <input type="text" name="name" id="name" disabled placeholder={{data.item.product.name}} />
+      </span>
+      <span>
+        <label for="price">Quantidade</label>
+        <input type="number" name="quantity" id="quantity" formControlName="quantity" placeholder={{data.item.quantity}}/>
+      </span>
+      <span>
+        <label for="production_date">Data de Fabricação (Opcional) </label>
+        <input type="date" [(ngModel)]="defaultProductionDate"  name="production_date" id="production_date" formControlName="production_date"/>
+      </span>
+    </div>
+    <div class="model-actions" mat-dialog-actions>
+      <button class="cancel-btn" mat-button (click)="closeDialog()">Cancelar</button>
+      <button type="submit" class="edit-btn" mat-button>Editar</button>
+    </div>
+  </form>
+</ng-container>
+
+<!-- Confirmação de Deleção -->
 <ng-container *ngIf="data?.type === 'delete-stock'">
   <div mat-dialog-content class="modal-content">
     <p>Tem certeza de que deseja excluir este item?</p>
@@ -142,6 +143,6 @@
 
   <div class="model-actions" mat-dialog-actions>
     <button class="cancel-btn" mat-button (click)="closeDialog()">Cancelar</button>
-    <button class="delete-btn" mat-button (click)="onDelete(data.id, 'stock')">Deletar</button>
+    <button class="delete-btn" mat-button (click)="onDeleteStock(data.id)">Deletar</button>
   </div>
 </ng-container>

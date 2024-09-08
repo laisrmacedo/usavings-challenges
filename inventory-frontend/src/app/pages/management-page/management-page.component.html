@@ -1,1 +1,34 @@
-<p>management-page works!</p>
+<div class="container">
+  <div class="table-area">
+    <h1>Estoque de Produtos</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Quantidade</th>
+          <th>Valor (R$)</th>
+          <th>Uni. Medida</th>
+          <th>Fabricação</th>
+          <th>Validade</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let item of parsedStock">
+            <td>{{item.product.name}}</td>
+            <td>{{item.quantity}}</td>
+            <td>{{item.product.price * item.quantity}}</td>
+            <td>{{item.product.unit}}</td>
+            <td>{{item.production_date}}</td>
+            <td>{{item.due_date}}</td>
+            <td><button class="edit-btn" (click)="openEditStockDialog(item)">Editar</button></td>
+            <td><button class="delete-btn" (click)="openDeleteStockDialog(item.id)">Deletar</button></td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="new-product-area">
+    <button class="add-btn" mat-button (click)="openRegisterStockDialog()">Cadastrar Produto</button>
+  </div>
+</div>

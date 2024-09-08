@@ -33,13 +33,19 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
     this.activePage = isClientSide() ? window.location.pathname : '';
 
-    this.globalService.getAll('product').subscribe(
+    this.globalService.getAllProducts().subscribe(
       (res:any) => {
         this.globalService.productsData = res
       }
     )
 
-    console.log("app ts", this.globalService.productsData)
+    this.globalService.getAllStocks().subscribe(
+      (res:any) => {
+        this.globalService.stockData = res
+      }
+    )
+
+    console.log("app ts", this.globalService.stockData)
   }
 }
 

@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { GlobalService } from '../../services/global.service';
 import { HttpClientModule } from '@angular/common/http';
-import { Product } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'app-dynamic-modal',
@@ -14,7 +13,7 @@ import { Product } from '../../interfaces/interfaces';
   templateUrl: './dynamic-modal.component.html',
   styleUrl: './dynamic-modal.component.css'
 })
-export class DynamicModalComponent {
+export class DynamicModalComponent implements OnInit{
   createProductForm: FormGroup
   createStockForm: FormGroup
   editProductForm: FormGroup
@@ -34,9 +33,9 @@ export class DynamicModalComponent {
       shelf_life: new FormControl('', [Validators.required])
     })
     this.createStockForm = this.fb.group({
-      product_name: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required]),
       quantity: new FormControl('', [Validators.required]),
-      expiration_date: new FormControl('', [Validators.required])
+      production_date: new FormControl('')
     })
     this.editProductForm = this.fb.group({
       price: new FormControl(''),
@@ -45,7 +44,7 @@ export class DynamicModalComponent {
     })
     this.editStockForm = this.fb.group({
       quantity: new FormControl(''),
-      expiration_date: new FormControl('')
+      production_date: new FormControl('')
     })
   }
 
@@ -55,33 +54,67 @@ export class DynamicModalComponent {
   names: any = ['leite', 'manteiga', 'queijo', 'coalhada', 'iogurte']
   // names: any = this.globalService.productsData$.map((obj)=> obj.unit).filter((value, index, self) => self.indexOf(value) === index);
 
+  defaultProductionDate: string = ''
+
+  ngOnInit() {
+    this.defaultProductionDate = this.getToday();
+  }
+
+  getToday(): string {
+    const today = new Date();
+    const day = String(today.getDate()).padStart(2, '0');
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const year = today.getFullYear();
+
+    return `${year}-${month}-${day}`;
+  }
 
   closeDialog(): void {
     this.dialogRef.close();
   }
 
-  onDelete(id: number, path: string): void {
-    this.globalService.delete(id, path).subscribe({
+  onDeleteProduct(id: number): void {
+    this.globalService.deleteProduct(id).subscribe({
       next: () => {
         this.closeDialog()
       }
     })
   }
 
-  onEdit(id: number, path: string): void {
-    let data : any = {}
-    path === 'product' ? data = this.editProductForm.value : this.editStockForm
-    this.globalService.update(id, data, path).subscribe({
+  onEditProduct(id: number): void {
+    this.globalService.updateProduct(id, this.editProductForm.value).subscribe({
       next: () => {
         this.closeDialog()
       }
     })
   }
 
-  onSubmit(path: string){
-    let data : any = {}
-    path === 'product' ? data = this.createProductForm.value : this.createStockForm
-    this.globalService.post(data, path).subscribe({
+  onSubmitProduct(){
+    this.globalService.postProduct(this.createProductForm.value).subscribe({
+      next: () => {
+        this.closeDialog()
+      }
+    })
+  }
+
+  onSubmitStock(){
+    this.globalService.postStock(this.createStockForm.value).subscribe({
+      next: () => {
+        this.closeDialog()
+      }
+    })
+  }
+
+  onDeleteStock(id: number): void {
+    this.globalService.deleteStock(id).subscribe({
+      next: () => {
+        this.closeDialog()
+      }
+    })
+  }
+
+  onEditStock(id: number): void {
+    this.globalService.updateStock(id, this.editStockForm.value).subscribe({
       next: () => {
         this.closeDialog()
       }
