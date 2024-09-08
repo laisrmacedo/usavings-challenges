@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DynamicModalService } from './dynamic-modal.service';
+import { GlobalService } from './global.service';
 
-describe('DynamicModalService', () => {
-  let service: DynamicModalService;
+describe('GlobalService', () => {
+  let service: GlobalService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(DynamicModalService);
+    service = TestBed.inject(GlobalService);
   });
 
   it('should be created', () => {

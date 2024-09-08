@@ -11,7 +11,7 @@ export class Product {
   @Column({ unique: true })
   name: string;
 
-  @Column('decimal', { precision: 10, scale: 2, unique: true })
+  @Column('decimal', { precision: 10, scale: 2 })
   price: number;
 
   @Column()
@@ -20,15 +20,12 @@ export class Product {
   @Column()
   shelf_life: number;
 
-  // Relacionamento com GoodsIn
   @OneToMany(() => GoodsIn, goodsIn => goodsIn.product)
   goodsIn: GoodsIn[];
 
-  // Relacionamento com GoodsOut
   @OneToMany(() => GoodsOut, goodsOut => goodsOut.product)
   goodsOut: GoodsOut[];
 
-  // Relacionamento com Stock
   @OneToMany(() => Stock, stock => stock.product)
   stock: Stock[];
 }

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { DynamicModalService } from '../../components/dynamic-modal/dynamic-modal.service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
+import { GlobalService } from '../../services/global.service';
+import { Product } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'app-products-page',
@@ -11,29 +11,27 @@ import { BrowserModule } from '@angular/platform-browser';
   templateUrl: './products-page.component.html',
   styleUrl: './products-page.component.css'
 })
-export class ProductsPageComponent implements OnInit{
+export class ProductsPageComponent{
   constructor(
-    private dynamicModalService: DynamicModalService,
-    private http: HttpClient
+    private globalService: GlobalService
   ) {}
 
-  ngOnInit(): void {
-    this.getProducts()
+  productsData$: any = this.globalService.productsData$
+
+  trackByProductId(index: number, product: Product): number {
+    return product.id;
+  }
+  
+  openRegisterDialog(type: string): void {
+    this.globalService.openRegisterModal(type);
   }
 
-  public productsData: any
-
-  openRegisterDialog(): void {
-    this.dynamicModalService.openRegisterModal();
+  openEditDialog(type: string, product: Product): void {
+    this.globalService.openEditModal(type, product);
   }
 
-  public getProducts(){
-    this.http.get('http://localhost:3000/product').subscribe(
-      (res:any) => {
-        console.log(res)
-        this.productsData = res
-      }
-    )
+  openDeleteDialog(type: string, id: string): void {
+    this.globalService.openDeleteModal(type, id);
   }
 
 }

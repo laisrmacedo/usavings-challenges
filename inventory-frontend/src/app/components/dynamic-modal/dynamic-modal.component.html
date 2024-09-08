@@ -1,29 +1,75 @@
-<h1 mat-dialog-title class="modal-title">
-  {{ data.type === 'register' ? 'Cadastrar Item' : 'Confirmar Deleção' }}
-</h1>
+<!-- Formulário para cadastro de produtos no catálogo -->
+<ng-container *ngIf="data?.type === 'register'">
+  <h1 mat-dialog-title class="modal-title">Cadastrar Produto</h1>
+  <form [formGroup]="createProductForm" (ngSubmit)="onSubmit()">
+    <div mat-dialog-content class="modal-content">
+      <span>
+        <label for="name">Nome</label>
+        <input type="text" name="name" id="name" formControlName="name" placeholder="Digite o nome do produto"/>
+      </span>
+      <span>
+        <label for="price">Preco Unitário (R$)</label>
+        <input type="number" name="price" id="price" formControlName="price"  placeholder="Digite o preço do produto"/>
+      </span>
+      <span>
+        <label for="unit">Unidade</label>
+        <select formControlName="unit">
+          <option style="color: gray;"  disabled>Selecione uma unidade de medida</option>
+          <option *ngFor="let unit of units" [ngValue]="unit">{{unit}}</option>
+        </select>
+      </span>
+      <span>
+        <label for="shelf-_ife">Validade</label>
+        <input type="number" name="shelf-life" id="shelf_life" formControlName="shelf_life"  placeholder="Digite o prazo de validade do produto"/>
+      </span>
+    </div>
+    <div class="model-actions" mat-dialog-actions>
+      <button class="cancel-btn" mat-button (click)="closeDialog()">Cancelar</button>
+      <button type="submit" class="add-btn" mat-button>Cadastrar</button>
+    </div>
+  </form>
+</ng-container>
 
-<div mat-dialog-content  class="modal-content">
-    <span>
-      <label for="name">Nome</label>
-      <input type="text" name="name" id="name"/>
-    </span>
-    <span>
-      <label for="price">Preco Unitário (R$)</label>
-      <input type="number" name="price" id="price"/>
-    </span>
-    <span>
-      <label for="unit">Unidade</label>
-      <input type="text" name="unit" id="unit"/>
-    </span>
-    <span>
-      <label for="shelf-life">Validade</label>
-      <input type="number" name="shelf-life" id="shelf-life"/>
-    </span>
-</div>
+<!-- Formulário para editar um produtos no catálogo -->
+<ng-container *ngIf="data?.type === 'edit'">
+  <h1 mat-dialog-title class="modal-title">Editar Produto</h1>
+  <form [formGroup]="editProductForm" (ngSubmit)="onSubmit()">
+    <div mat-dialog-content class="modal-content">
+      <span>
+        <label for="name">Nome</label>
+        <input type="text" name="name" id="name" placeholder={{data.product.name}} />
+      </span>
+      <span>
+        <label for="price">Preco Unitário (R$)</label>
+        <input type="number" name="price" id="price" formControlName="price" placeholder={{data.product.price}}/>
+      </span>
+      <span>
+        <label for="unit">Unidade</label>
+        <select formControlName="unit">
+          <option [ngValue]="null" disabled>{{data.product.unit}}</option>
+          <option style="color: white;" *ngFor="let unit of units" [ngValue]="unit">{{unit}}</option>
+        </select>
+      </span>
+      <span>
+        <label for="shelf-_ife">Validade</label>
+        <input type="number" name="shelf-life" id="shelf_life" formControlName="shelf_life" placeholder={{data.product.shelf_life}}/>
+      </span>
+    </div>
+    <div class="model-actions" mat-dialog-actions>
+      <button class="cancel-btn" mat-button (click)="closeDialog()">Cancelar</button>
+      <button type="submit" class="edit-btn" mat-button (click)="onEdit(data.product.id)">Editar</button>
+    </div>
+  </form>
+</ng-container>
 
-<div class="model-actions" mat-dialog-actions>
-  <button class="cancel-btn" mat-button (click)="closeDialog()">Cancelar</button>
-  <ng-container *ngIf="data?.type === 'register'">
-    <button class="add-btn" mat-button (click)="closeDialog()">Cadastrar</button>
-  </ng-container>
-</div> 
+<!-- Confirmação de Deleção -->
+<ng-container *ngIf="data?.type === 'delete'">
+  <div mat-dialog-content class="modal-content">
+    <p>Tem certeza de que deseja excluir este item?</p>
+  </div>
+
+  <div class="model-actions" mat-dialog-actions>
+    <button class="cancel-btn" mat-button (click)="closeDialog()">Cancelar</button>
+    <button class="delete-btn" mat-button (click)="onDelete(data.id)">Deletar</button>
+  </div>
+</ng-container>

@@ -12,20 +12,18 @@
         </tr>
       </thead>
       <tbody>
-        @for (productData of productsData; track productsData){
-          <tr>
+          <tr *ngFor="let productData of productsData$">
             <td>{{productData.name}}</td>
             <td>{{productData.price}}</td>
             <td>{{productData.unit}}</td>
             <td>{{productData.shelf_life}}</td>
-            <td><button class="edit-btn">Editar</button></td>
-            <td><button class="delete-btn">Deletar</button></td>
+            <td><button class="edit-btn" (click)="openEditDialog('edit', productData.id)">Editar</button></td>
+            <td><button class="delete-btn" (click)="openDeleteDialog('delete', productData.id)">Deletar</button></td>
           </tr>
-        }
       </tbody>
     </table>
   </div>
   <div class="new-product-area">
-    <button class="add-btn" mat-button (click)="openRegisterDialog()">Cadastrar Produto</button>
+    <button class="add-btn" mat-button (click)="openRegisterDialog('register')">Cadastrar Produto</button>
   </div>
 </div>
