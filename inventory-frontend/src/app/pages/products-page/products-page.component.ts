@@ -3,7 +3,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { GlobalService } from '../../services/global.service';
 import { Product } from '../../interfaces/interfaces';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-products-page',
@@ -15,26 +14,20 @@ import { Observable } from 'rxjs';
 export class ProductsPageComponent{
   constructor(
     private globalService: GlobalService
-  ) {
-
-  }
+  ) {}
 
   productsData: Product[] = this.globalService.productsData
-
-  trackByProductId(index: number, product: Product): number {
-    return product.id;
-  }
   
-  openRegisterDialog(type: string): void {
-    this.globalService.openRegisterModal(type);
+  openRegisterProductDialog(): void {
+    this.globalService.openRegisterProductModal();
   }
 
-  openEditDialog(type: string, product: Product): void {
-    this.globalService.openEditModal(type, product);
+  openEditProductDialog(product: Product): void {
+    this.globalService.openEditProductModal(product);
   }
 
-  openDeleteDialog(type: string, id: number): void {
-    this.globalService.openDeleteModal(type, id);
+  openDeleteProductDialog(id: number): void {
+    this.globalService.openDeleteProductModal(id);
   }
 
 }
