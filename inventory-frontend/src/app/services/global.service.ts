@@ -60,6 +60,8 @@ export class GlobalService{
   }
   
   update(id: number, product: Product, path: string): Observable<Product>{
+
+    console.log('>>>>>>', id, product, path)
     const filteredProduct = Object.fromEntries(
       Object.entries(product).filter(([key, value]) => value !== '')
     );

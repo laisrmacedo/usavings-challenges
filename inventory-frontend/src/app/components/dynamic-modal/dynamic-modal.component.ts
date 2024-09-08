@@ -16,7 +16,9 @@ import { Product } from '../../interfaces/interfaces';
 })
 export class DynamicModalComponent {
   createProductForm: FormGroup
+  createStockForm: FormGroup
   editProductForm: FormGroup
+  editStockForm: FormGroup
 
   
   constructor(
@@ -31,40 +33,55 @@ export class DynamicModalComponent {
       unit: new FormControl('', [Validators.required]),
       shelf_life: new FormControl('', [Validators.required])
     })
+    this.createStockForm = this.fb.group({
+      product_name: new FormControl('', [Validators.required]),
+      quantity: new FormControl('', [Validators.required]),
+      expiration_date: new FormControl('', [Validators.required])
+    })
     this.editProductForm = this.fb.group({
       price: new FormControl(''),
       unit: new FormControl(''),
       shelf_life: new FormControl('')
     })
-    console.log(">>>>>",this.units)
+    this.editStockForm = this.fb.group({
+      quantity: new FormControl(''),
+      expiration_date: new FormControl('')
+    })
   }
+
+  // productsData: Product[] = this.globalService.productsData$
   
   units: any = ['l','ml', 'kg', 'g' ]
+  names: any = ['leite', 'manteiga', 'queijo', 'coalhada', 'iogurte']
+  // names: any = this.globalService.productsData$.map((obj)=> obj.unit).filter((value, index, self) => self.indexOf(value) === index);
 
 
   closeDialog(): void {
     this.dialogRef.close();
   }
 
-  onDelete(id: string): void {
-    this.globalService.deleteProduct(id).subscribe({
+  onDelete(id: number, path: string): void {
+    this.globalService.delete(id, path).subscribe({
       next: () => {
         this.closeDialog()
       }
     })
   }
 
-  onEdit(id: string): void {
-    this.globalService.updateProduct(id, this.editProductForm.value).subscribe({
+  onEdit(id: number, path: string): void {
+    let data : any = {}
+    path === 'product' ? data = this.editProductForm.value : this.editStockForm
+    this.globalService.update(id, data, path).subscribe({
       next: () => {
         this.closeDialog()
       }
     })
   }
 
-  onSubmit(){
-    console.log(this.createProductForm.value)
-    this.globalService.postProduct(this.createProductForm.value).subscribe({
+  onSubmit(path: string){
+    let data : any = {}
+    path === 'product' ? data = this.createProductForm.value : this.createStockForm
+    this.globalService.post(data, path).subscribe({
       next: () => {
         this.closeDialog()
       }
