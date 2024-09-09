@@ -1,1 +1,40 @@
-<p>overview-page works!</p>
+<div class="container">
+  <div class="table-area">
+    <div class="table-header">
+      <h1>Controle de Estoque</h1>
+      <div>
+        <span class="expired">Produto Vencido</span>
+        <span class="close-to-expire">Vencimento próximo</span>
+      </div>
+    </div>
+    <!-- <div>
+      <input />
+      <button>Filtrar</button>
+    </div> -->
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Quantidade</th>
+          <th>Valor (R$)</th>
+          <th>Uni. Medida</th>
+          <th>Fabricação</th>
+          <th>Válido até</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of parsedStock" [ngClass]="{
+          'expired': isExpired(item.due_date),
+          'close-to-expire': isCloseToExpire(item.due_date) && !isExpired(item.due_date)
+        }">
+          <td>{{item.product.name}}</td>
+          <td>{{item.quantity}}</td>
+          <td>{{item.product.price * item.quantity}}</td>
+          <td>{{item.product.unit}}</td>
+          <td>{{item.production_date}}</td>
+          <td>{{item.due_date}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

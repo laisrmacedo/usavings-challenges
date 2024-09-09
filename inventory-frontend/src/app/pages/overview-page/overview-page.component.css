@@ -1,0 +1,73 @@
+.container{
+  width: 100%;
+  height: 100%;
+  padding-top: 40px;
+  /* border: 1px solid red; */
+}
+
+.table-area{
+  height: 90%;
+}
+
+.table-header{
+  background-color: rgb(243, 243, 243);
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  padding: 10px 40px;
+  gap: 10px;
+}
+
+.table-header h1{
+  text-transform: uppercase;
+  font-size: 14px;
+  color: rgb(49, 49, 49);
+  padding: 4px;
+}
+
+.table-header div{
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.table-header span{
+  text-transform: uppercase;
+  font-size: 8px;
+  padding: 4px;
+}
+
+
+table{
+  width: 100%;
+  border-spacing: 0;
+}
+
+thead th{ 
+  border: none;
+  padding: 8px 0;
+  width: calc(100% / 8);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+tbody td{ 
+  border-top: 1px solid rgb(224, 222, 222);
+  padding: 16px 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.expired {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.close-to-expire {
+  background-color: #f7f1e2;;
+  color: #856404;
+}
+
+.temp-class {
+  background-color: lightblue; /* Cor de teste para verificação */
+}
