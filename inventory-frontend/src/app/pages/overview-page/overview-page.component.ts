@@ -23,7 +23,6 @@ export class OverviewPageComponent {
   }).map((item: Stock) => {
     const updatedProductionDate = this.parsedDate(new Date(item.production_date));
     const updatedDueDate = this.parsedDate(new Date(item.due_date));
-    console.log(`Due Date: `, updatedProductionDate, updatedDueDate);
 
     return {
       ...item,
@@ -44,26 +43,29 @@ export class OverviewPageComponent {
   }
 
   isExpired(dueDate: string): boolean {
+    const [day, month, year] = dueDate.split('/').map(Number);
+    const expirationDate = new Date(year, month - 1, day).getTime();
     const today = new Date();
-    const expirationDate = new Date(dueDate);
-    return expirationDate < today;
+    
+    today.setHours(0, 0, 0, 0);
+  
+    const todayTime = today.getTime();
+    return expirationDate <= todayTime;
   }
+  
 
   isCloseToExpire(dueDate: string): boolean {
     const today = new Date();
     const [day, month, year] = dueDate.split('/').map(Number);
   
-    // Cria a data de expiração no formato dd/mm/yyyy
     const expirationDate = new Date(year, month - 1, day);
   
-    // Ajusta para o início do dia
     today.setHours(0, 0, 0, 0);
     expirationDate.setHours(0, 0, 0, 0);
   
     const timeDifference = expirationDate.getTime() - today.getTime();
     const diffInDays = timeDifference / (1000 * 3600 * 24);
   
-    console.log(`Due Date: ${dueDate}, Days Difference: ${diffInDays}`);
     return diffInDays <= 3 && diffInDays > 0;
   }
   
