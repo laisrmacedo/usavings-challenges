@@ -5,9 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { GlobalService } from '../../services/global.service';
 import { HttpClientModule } from '@angular/common/http';
-import { Stock } from '../../interfaces/interfaces';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { Product, Stock } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'app-dynamic-modal',
@@ -50,18 +48,17 @@ export class DynamicModalComponent implements OnInit {
     })
   }
 
-  // productsData: Product[] = this.globalService.productsData$
+  productsData: Product[] = this.globalService.productsData
 
-  units: any = ['l', 'ml', 'kg', 'g']
-  names: any = ['leite', 'manteiga', 'queijo', 'coalhada', 'iogurte']
-  // names: any = this.globalService.productsData$.map((obj)=> obj.unit).filter((value, index, self) => self.indexOf(value) === index);
+  units: any = ['l', 'kg']
+  names: any = this.productsData .map((obj)=> obj.name)
 
   defaultProductionDate: string = ''
 
   ngOnInit() {
     this.defaultProductionDate = this.getToday();
   }
-
+  
   getToday(): string {
     const today = new Date();
     const day = String(today.getDate()).padStart(2, '0');
