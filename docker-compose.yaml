@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  inventory-frontend:
+    build:
+      context: ./inventory-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
+    
+
+  inventory-backend:
+    build:
+      context: ./inventory-backend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_DATABASE: ${DB_DATABASE}

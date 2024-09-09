@@ -2,7 +2,7 @@ FROM node:18.17.1-alpine
 
 WORKDIR /intentory-backend
 
-COPY ./src .
+COPY ./src/ ./src/
 COPY ./package.json .
 COPY ./tsconfig.json .
 
