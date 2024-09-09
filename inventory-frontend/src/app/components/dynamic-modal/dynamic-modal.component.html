@@ -93,15 +93,24 @@
           <option [ngValue]="null" disabled>Selecione um produto</option>
           <option style="color: white;" *ngFor="let name of names" [ngValue]="name">{{name}}</option>
         </select>
+        <div *ngIf="createStockForm.get('name')?.invalid && createStockForm.get('name')?.touched">
+          <p class="error-message">Nome é obrigatório.</p>
+        </div>
       </span>
       <span>
         <label for="quantity">Quantidade *</label>
         <input type="number" name="quantity" id="quantity" formControlName="quantity"  placeholder="Digite a quantidade"/>
+        <div *ngIf="createStockForm.get('quantity')?.invalid && createStockForm.get('quantity')?.touched">
+          <p class="error-message">Quantidade é obrigatório.</p>
+        </div>
       </span>
       <span>
         <label for="production_date">Data de Fabricação (Opcional) </label>
         <input type="date" [(ngModel)]="defaultProductionDate"  name="production_date" id="production_date" formControlName="production_date"/>
       </span>
+      <div *ngIf="errorMessage" >
+        {{ errorMessage }}
+      </div>
     </div>
     <div class="model-actions" mat-dialog-actions>
       <button class="cancel-btn" mat-button (click)="closeDialog()">Cancelar</button>
@@ -123,9 +132,10 @@
         <label for="price">Quantidade</label>
         <input type="number" name="quantity" id="quantity" formControlName="quantity" placeholder={{data.item.quantity}}/>
       </span>
-      <span>
+      <span> 
+        <!-- {{data.item.production_date}} -->
         <label for="production_date">Data de Fabricação (Opcional) </label>
-        <input type="date" [(ngModel)]="defaultProductionDate"  name="production_date" id="production_date" formControlName="production_date"/>
+        <input type="date" [(ngModel)]="data.item.production_date"  name="production_date" id="production_date" formControlName="production_date"/>
       </span>
     </div>
     <div class="model-actions" mat-dialog-actions>

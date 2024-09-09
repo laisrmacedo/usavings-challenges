@@ -44,8 +44,6 @@ export class AppComponent implements OnInit{
         this.globalService.stockData = res
       }
     )
-
-    console.log("app ts", this.globalService.stockData)
   }
 }
 

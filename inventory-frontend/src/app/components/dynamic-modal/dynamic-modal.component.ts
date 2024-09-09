@@ -5,6 +5,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { GlobalService } from '../../services/global.service';
 import { HttpClientModule } from '@angular/common/http';
+import { Stock } from '../../interfaces/interfaces';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-dynamic-modal',
@@ -13,13 +16,12 @@ import { HttpClientModule } from '@angular/common/http';
   templateUrl: './dynamic-modal.component.html',
   styleUrl: './dynamic-modal.component.css'
 })
-export class DynamicModalComponent implements OnInit{
+export class DynamicModalComponent implements OnInit {
   createProductForm: FormGroup
   createStockForm: FormGroup
   editProductForm: FormGroup
   editStockForm: FormGroup
 
-  
   constructor(
     public dialogRef: MatDialogRef<DynamicModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -49,8 +51,8 @@ export class DynamicModalComponent implements OnInit{
   }
 
   // productsData: Product[] = this.globalService.productsData$
-  
-  units: any = ['l','ml', 'kg', 'g' ]
+
+  units: any = ['l', 'ml', 'kg', 'g']
   names: any = ['leite', 'manteiga', 'queijo', 'coalhada', 'iogurte']
   // names: any = this.globalService.productsData$.map((obj)=> obj.unit).filter((value, index, self) => self.indexOf(value) === index);
 
@@ -70,6 +72,7 @@ export class DynamicModalComponent implements OnInit{
   }
 
   closeDialog(): void {
+    window.location.reload()
     this.dialogRef.close();
   }
 
@@ -89,7 +92,7 @@ export class DynamicModalComponent implements OnInit{
     })
   }
 
-  onSubmitProduct(){
+  onSubmitProduct() {
     this.globalService.postProduct(this.createProductForm.value).subscribe({
       next: () => {
         this.closeDialog()
@@ -97,12 +100,19 @@ export class DynamicModalComponent implements OnInit{
     })
   }
 
-  onSubmitStock(){
-    this.globalService.postStock(this.createStockForm.value).subscribe({
-      next: () => {
-        this.closeDialog()
-      }
-    })
+  errorMessage: string | null = null;
+
+  onSubmitStock() {
+    this.globalService.postStock(this.createStockForm.value)
+      .subscribe({
+        error: (error) => {
+          this.errorMessage = error.errorMessage
+          console.log(error)
+        },
+        next: () => {
+          this.closeDialog()
+        }
+      })
   }
 
   onDeleteStock(id: number): void {

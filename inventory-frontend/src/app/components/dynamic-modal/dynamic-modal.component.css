@@ -45,3 +45,8 @@ input, select{
   background-color: var(--my-red-1);
   color: var(--my-white);
 }
+
+.error-message{
+  color: red;
+  font-size: 12px;
+}
