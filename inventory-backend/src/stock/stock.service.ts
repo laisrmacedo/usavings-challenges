@@ -25,15 +25,12 @@ export class StockService {
   }
 
   addDays(dateStr: Date, daysToAdd: number): Date {
-    console.log("aquiaaaaaaaaaa", dateStr, daysToAdd)
     const date = new Date(dateStr);
     date.setDate(date.getDate() + daysToAdd);
     return date
   }
 
   async createStockWithProduct(name: string, quantity: number, production_date: Date): Promise<Stock> {
-    
-    
     const product = await this.productRepository.findOneBy({ name });
     if (!product) {
       throw new Error('Product not found');
@@ -51,13 +48,11 @@ export class StockService {
     stock.production_date = production_date;
     stock.due_date = dueDate;
 
-
     return this.stockRepository.save(stock);
   }
 
   async update(id: number, updatedStock: Partial<Stock>): Promise<Stock> {
     const savedStock = await this.findOne(id);
-    console.log("aagora", updatedStock, savedStock)
 
     let due_date = savedStock.due_date;
     if(updatedStock.production_date) {

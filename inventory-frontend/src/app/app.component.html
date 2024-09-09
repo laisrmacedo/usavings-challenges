@@ -10,8 +10,8 @@
   </header>
   <div>
     <nav>
-        <span [class.active]="activePage === '/visao-geral'" (click)="navigate('/visao-geral')">Visão Geral</span>
-        <span [class.active]="activePage === '/gerenciamento'" (click)="navigate('/gerenciamento')">Gerenciamento</span>
+        <span [class.active]="activePage === '/'" (click)="navigate('/')">Visão Geral</span>
+        <span [class.active]="activePage === '/gerenciamento'" (click)="navigate('/gerenciamento')">Estoque</span>
         <span [class.active]="activePage === '/produtos'" (click)="navigate('/produtos')">Catálogo</span>
     </nav>
     <main>

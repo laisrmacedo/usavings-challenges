@@ -6,7 +6,7 @@ import { ManagementPageComponent } from './pages/management-page/management-page
 
 export const routes: Routes = [
   { path: 'produtos', component: ProductsPageComponent },
-  { path: 'visao-geral', component: OverviewPageComponent },
+  { path: '', component: OverviewPageComponent },
   { path: 'gerenciamento', component: ManagementPageComponent },
   { path: '', redirectTo: '/produtos', pathMatch: 'full' },
 ];
