@@ -11,7 +11,7 @@
 .new-product-area{
   height: 10%;
   display: flex;
-  justify-content: center;
+  justify-content: end;
   align-items: center;
 }
 
