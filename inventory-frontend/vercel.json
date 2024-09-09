@@ -1,8 +1,19 @@
 {
-  "rewrites": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "src": "dist/inventory-frontend/server/main.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "dist/inventory-frontend/browser/index.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "dist/inventory-frontend/server/main.js"
     }
   ]
 }
