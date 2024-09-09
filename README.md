@@ -89,6 +89,19 @@ npm install
 ng serve
 ```
 
+## Docker
+Tanto o inventory-backend quando o inventory-frontend possuem Dockerfiles que descrevem a imagem do container e podem ser executadas individualmente.
+
+Para subir o servidor do backend, basta ir para o diretório `inventory-backend` e executar o comando:
+- `docker build -t inventory-backend:latest && docker run -p 3000:3000 --env-file ./.env inventory-backend:latest`
+Lembre de ter o arquivo `.env` na pasta `inventory-backend`.
+
+Para subir o servidor do frontend, basta ir para o diretório `inventory-frontend` e executar o comando:
+- `docker build -t inventory-frontend:latest && docker run -p 4200:4200 inventory-frontend:latest`.
+
+Por fim, a forma mais simples e rápida de rodar ambas as aplicações é usando o docker-compose.
+Para isso, vá para a raiz do repositório, crie um arquivo `.env` similar ao que está em `inventory-backend`, com exceção da variável `DB_HOST` que deve ter valor `host.docker.internal`. Após ter feito isso, execute o comando `docker-compose up`. Pronto! Agora ambas as aplicações estão sendo executadas.
+
 ## 🗂️ Documentanção
 
 [REST API: Inventory Management](https://documenter.getpostman.com/view/24460805/2sAXjRXA7g) 
