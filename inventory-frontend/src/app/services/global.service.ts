@@ -11,7 +11,8 @@ type Entity = 'product' | 'stock'
   providedIn: 'root'
 })
 export class GlobalService{
-  apiUrl = 'http://localhost:3000'
+  // apiUrl = 'http://localhost:3000'
+  apiUrl = 'https://usavings-challenges.onrender.com'
 
   productsData: Product[] = [{id:0, name: '', price: 0, unit: '', shelf_life: 0}]
   stockData: Stock[] = [{id:0, quantity: 0, production_date: new Date(), created_at: new Date(), due_date: new Date(), product: {id:0, name: '', price: 0, unit: '', shelf_life: 0}}]
