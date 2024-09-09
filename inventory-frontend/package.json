@@ -6,6 +6,7 @@
     "start": "ng serve --host 0.0.0.0",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
+    "build:prd": "ng build --configuration production",
     "test": "ng test",
     "serve:ssr:inventory-frontend": "node dist/inventory-frontend/server/server.mjs"
   },
