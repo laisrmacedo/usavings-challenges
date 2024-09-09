@@ -26,9 +26,8 @@ export class StockController {
   async createStock(
     @Body('name') name: string,
     @Body('quantity') quantity: number,
-    @Body('production_date') production_date: Date = new Date()
+    @Body('production_date') production_date
   ): Promise<Stock> {
-    console.log('testeeeeeeeee', production_date, '<<<<<')
     return this.stockService.createStockWithProduct(name, quantity, production_date);
   }
 

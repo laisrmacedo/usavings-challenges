@@ -24,22 +24,26 @@ export class StockService {
     });
   }
 
-  async createStockWithProduct(name: string, quantity: number, production_date: Date): Promise<Stock> {
-    const product = await this.productRepository.findOneBy({ name });
+  addDays(dateStr: Date, daysToAdd: number): Date {
+    console.log("aquiaaaaaaaaaa", dateStr, daysToAdd)
+    const date = new Date(dateStr);
+    date.setDate(date.getDate() + daysToAdd);
+    return date
+  }
 
+  async createStockWithProduct(name: string, quantity: number, production_date: Date): Promise<Stock> {
+    
+    
+    const product = await this.productRepository.findOneBy({ name });
     if (!product) {
       throw new Error('Product not found');
     }
-    console.log(production_date, new Date(production_date), '<<<<<')
 
-    function addDays(dateStr: Date, daysToAdd: number): Date {
-      console.log("aqui", dateStr, daysToAdd)
-      const date = new Date(dateStr);
-      date.setDate(date.getDate() + daysToAdd);
-      return date
+    const dueDate = this.addDays(new Date(production_date), product.shelf_life);
+
+    if (dueDate < new Date()) {
+      throw new Error('Este produto já está vencido.');
     }
-
-    const dueDate = addDays(new Date(production_date), product.shelf_life);
 
     const stock = new Stock();
     stock.product = product;
@@ -52,7 +56,18 @@ export class StockService {
   }
 
   async update(id: number, updatedStock: Partial<Stock>): Promise<Stock> {
-    await this.stockRepository.update(id, updatedStock);
+    const savedStock = await this.findOne(id);
+    console.log("aagora", updatedStock, savedStock)
+
+    let due_date = savedStock.due_date;
+    if(updatedStock.production_date) {
+      due_date = this.addDays(new Date(updatedStock.production_date), savedStock.product.shelf_life);
+    }
+
+    await this.stockRepository.update(id, {
+      ...updatedStock,
+      due_date,
+    });
     return this.findOne(id);
   }
 
