@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "dist/inventory-frontend/server/main.js",
+      "src": "dist/inventory-frontend/server/main.server.mjs",
       "use": "@vercel/node"
     },
     {
@@ -13,7 +13,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "dist/inventory-frontend/server/main.js"
+      "dest": "dist/inventory-frontend/server/main.server.mjs"
     }
   ]
 }
