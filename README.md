@@ -4,21 +4,25 @@ Desafios para candidatos(as) para vagas do time uSavings (Ustore/Claro Brasil)
 
 ## 📝 Contexto Persolalizado
 
-Lucas, um jovem empreendedor, decidiu abrir sua própria empresa chamada Vitallate, focada na produção de produtos derivados de leite. Ele observou que o processo de gerenciamento de inventário de sua empresa, especialmente no que diz respeito ao monitoramento das datas de validade dos produtos, é frequentemente manual e suscetível a erros. Ele decidiu que seria benéfico desenvolver uma aplicação web que simplificasse essa tarefa, permitindo-o controlar seus produtos de forma mais eficiente e evitar prejuízos decorrentes de produtos vencidos.
+Lucas, um jovem empreendedor, decidiu abrir sua própria empresa chamada Vitalatte, focada na produção de produtos derivados de leite. Ele observou que o processo de gerenciamento de inventário de sua empresa, especialmente no que diz respeito ao monitoramento das datas de validade dos produtos, é frequentemente manual e suscetível a erros. Ele decidiu que seria benéfico desenvolver uma aplicação web que simplificasse essa tarefa, permitindo-o controlar seus produtos de forma mais eficiente e evitar prejuízos decorrentes de produtos vencidos.
 
 ## 📌 Solução Proposta
 
 Para resolver o problema de Lucas, eu desenvolvi uma aplicação web full stack com as seguintes funcionalidades:
 
 1. Tela para catalogar os produtos
-  - Catalogar todos os produtos produzidos pela empresa;
+  - Catalogar todos os produtos da empresa;
   - As informações do produto podem ser editadas;
-  - Os produtos podem ser excluidos do catálogo.
+  - Os produtos podem ser excluidos do catálogo;
+  - Um produto só pode ser cadastrado uma vez no catálogo.
 
 2. Tela para gerenciar o estoque
--   Registrar produtos no estoque;
+  - Registrar produtos no estoque;
   - As informações do registro podem ser editadas;
   - Os registros podem ser excluidos do estoque;
+  - Um produto não pode ser registrado se não estiver no catálogo;
+  - A data de fabricação do produto pode ser informada ou preenchida automaticamente com a data do dia do registro;
+  - A data de vencimento é calculada a partir da data de fabricação e do tempo de vida útil do produto, simplificando e diminuindo a possibilidade de erros; 
   - Um produto não pode ser registrado se já estive vencido.
 
 3. Tela para visão geral do estoque e facilitar o acompanhamento do prazo de validade dos produtos
@@ -85,6 +89,11 @@ npm install
 ng serve
 ```
 
+## 🗂️ Documentanção
+
+[REST API: Inventory Management](https://documenter.getpostman.com/view/24460805/2sAXjRXA7g) 
+
+
 ## 🛠️ Construído com
 
 ### Frontend
@@ -99,6 +108,7 @@ ng serve
 * [Typescript](https://www.typescriptlang.org/docs/)
 * [MySQL](https://dev.mysql.com/doc/)
 * [TypeORM](https://typeorm.io/)
+* [Docker](https://docs.docker.com/)
 
 ## ✒️ Autora
 
