@@ -6,9 +6,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { DynamicModalComponent } from '../components/dynamic-modal/dynamic-modal.component';
 import { environment } from '../../environments/environment';
 
-
-type Entity = 'product' | 'stock'
-
 @Injectable({
   providedIn: 'root'
 })
@@ -47,11 +44,6 @@ export class GlobalService{
       data: { type : 'delete-product', id }
     });
   }
-
-
-
-
-
 
   openRegisterStockModal(): void {
     this.dialog.open(DynamicModalComponent, {
