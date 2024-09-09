@@ -79,13 +79,7 @@ cd inventory-frontend
 npm install
 ```
 
-3. Crie um arquivo .env na raiz do diretório frontend com as seguintes variáveis (ajuste conforme necessário):
-
-```
-API_URL=http://localhost:3000
-```
-
-4. Inicie o servidor de desenvolvimento do Angular:
+3. Inicie o servidor de desenvolvimento do Angular:
 
 ```
 ng serve
