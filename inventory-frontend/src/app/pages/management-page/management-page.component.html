@@ -1,6 +1,10 @@
 <div class="container">
   <div class="table-area">
-    <h1>Estoque de Produtos</h1>
+    <div class="table-title">
+      <h1>Estoque de Produtos</h1>
+    <button class="add-btn" mat-button (click)="openRegisterStockDialog()">Registrar Produção</button>
+
+    </div>
     <table>
       <thead>
         <tr>
@@ -27,8 +31,5 @@
           </tr>
       </tbody>
     </table>
-  </div>
-  <div class="new-product-area">
-    <button class="add-btn" mat-button (click)="openRegisterStockDialog()">Registrar Produção</button>
   </div>
 </div>

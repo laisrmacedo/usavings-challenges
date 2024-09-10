@@ -1,5 +1,9 @@
 <div class="container">
   <div class="table-area">
+    <div class="table-title">
+      <h1>Produtos Cadastrados</h1>
+      <button class="add-btn" mat-button (click)="openRegisterProductDialog()">Cadastrar Produto</button>
+    </div>
     <table>
       <thead>
         <tr>
@@ -22,8 +26,5 @@
           </tr>
       </tbody>
     </table>
-  </div>
-  <div class="new-product-area">
-    <button class="add-btn" mat-button (click)="openRegisterProductDialog()">Cadastrar Produto</button>
   </div>
 </div>
