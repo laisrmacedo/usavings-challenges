@@ -106,8 +106,16 @@ footer {
 }
 
 footer>h5 {
-  font-size: 14px;
+  font-size: 15px;
   font-variant: all-small-caps;
+}
+
+footer>h5 :hover{
+  color: #4271bd;
+  transition: ease-in;
+}
+
+a{
   text-decoration: none;
 }
 
