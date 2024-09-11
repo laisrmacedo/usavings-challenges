@@ -5,18 +5,19 @@
       <button class="add-btn" mat-button (click)="openRegisterProductDialog()">Cadastrar Produto</button>
       <button class="mobile-btn" mat-button (click)="openRegisterProductDialog()">+</button>
     </div>
-    <table>
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Preço Uni. (R$)</th>
-          <th>Unidade</th>
-          <th>Validade (Dias)</th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Preço Uni. (R$)</th>
+            <th>Unidade</th>
+            <th>Validade (Dias)</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
           <tr *ngFor="let productData of productsData">
             <td>{{productData.name}}</td>
             <td>{{productData.price}}</td>
@@ -25,7 +26,8 @@
             <td><button class="edit-btn" (click)="openEditProductDialog(productData)">Editar</button></td>
             <td><button class="delete-btn" (click)="openDeleteProductDialog(productData.id)">Deletar</button></td>
           </tr>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
