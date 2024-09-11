@@ -2,8 +2,8 @@
   <div class="table-area">
     <div class="table-title">
       <h1>Estoque de Produtos</h1>
-    <button class="add-btn" mat-button (click)="openRegisterStockDialog()">Registrar Produção</button>
-
+      <button class="add-btn" mat-button (click)="openRegisterStockDialog()">Registrar Produção</button>
+      <button class="mobile-btn" mat-button (click)="openRegisterStockDialog()">+</button>
     </div>
     <table>
       <thead>
@@ -19,16 +19,16 @@
         </tr>
       </thead>
       <tbody>
-          <tr *ngFor="let item of parsedStock">
-            <td>{{item.product.name}}</td>
-            <td>{{item.quantity}}</td>
-            <td>{{item.product.price * item.quantity}}</td>
-            <td>{{item.product.unit}}</td>
-            <td>{{item.production_date}}</td>
-            <td>{{item.due_date}}</td>
-            <td><button class="edit-btn" (click)="openEditStockDialog(item)">Editar</button></td>
-            <td><button class="delete-btn" (click)="openDeleteStockDialog(item.id)">Deletar</button></td>
-          </tr>
+        <tr *ngFor="let item of parsedStock">
+          <td>{{item.product.name}}</td>
+          <td>{{item.quantity}}</td>
+          <td>{{item.product.price * item.quantity}}</td>
+          <td>{{item.product.unit}}</td>
+          <td>{{item.production_date}}</td>
+          <td>{{item.due_date}}</td>
+          <td><button class="edit-btn" (click)="openEditStockDialog(item)">Editar</button></td>
+          <td><button class="delete-btn" (click)="openDeleteStockDialog(item.id)">Deletar</button></td>
+        </tr>
       </tbody>
     </table>
   </div>
