@@ -18,11 +18,7 @@ export class GlobalService{
   constructor(
     private http: HttpClient,
     private dialog: MatDialog,
-  ) {
-    this.http.get('https://usavings-challenges.onrender.com/', {
-      headers: { 'Cache-Control': 'no-store' }
-    });    
-   }
+  ) {}
   
   //Modal
   openRegisterProductModal(): void {
@@ -92,7 +88,7 @@ export class GlobalService{
   
   getAllProducts(){
     console.log(this.apiUrl, '<<<<<<<<<< this.apiUrl');
-    return this.http.get<Product[]>(`${this.apiUrl}/product`)
+    return this.http.get<Product[]>(`${this.apiUrl}/product`, {headers: { 'Cache-Control': 'no-store' }})
   }
   
   //Basic CRUD STOCK
