@@ -86,6 +86,7 @@ export class GlobalService{
   }
   
   postProduct(product: Product): Observable<Product>{
+    console.log("return post product", this.http.post<Product>(`${this.apiUrl}/product`, product))
     return this.http.post<Product>(`${this.apiUrl}/product`, product)
   }
   
