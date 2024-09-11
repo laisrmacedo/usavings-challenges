@@ -18,7 +18,11 @@ export class GlobalService{
   constructor(
     private http: HttpClient,
     private dialog: MatDialog,
-  ) { }
+  ) {
+    this.http.get('https://usavings-challenges.onrender.com/', {
+      headers: { 'Cache-Control': 'no-store' }
+    });    
+   }
   
   //Modal
   openRegisterProductModal(): void {
