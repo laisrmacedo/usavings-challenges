@@ -11,8 +11,8 @@ COPY ./tsconfig.app.json .
 COPY ./angular.json .
 
 RUN npm install
-RUN npm run build
+RUN npm run build:prd
 
-EXPOSE 4200
+EXPOSE 4000
 
-CMD ["npm", "start"]
+CMD ["npm", "run", "serve:ssr:inventory-frontend"]
