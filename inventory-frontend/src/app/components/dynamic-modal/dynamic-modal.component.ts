@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -12,7 +12,8 @@ import { Product, Stock } from '../../interfaces/interfaces';
   standalone: true,
   imports: [CommonModule, MatDialogModule, MatButtonModule, ReactiveFormsModule, HttpClientModule],
   templateUrl: './dynamic-modal.component.html',
-  styleUrl: './dynamic-modal.component.css'
+  styleUrl: './dynamic-modal.component.css',
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class DynamicModalComponent implements OnInit {
   createProductForm: FormGroup
@@ -24,7 +25,8 @@ export class DynamicModalComponent implements OnInit {
     public dialogRef: MatDialogRef<DynamicModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
-    private globalService: GlobalService
+    private globalService: GlobalService,
+    private changeDetectorRef: ChangeDetectorRef
   ) {
     this.createProductForm = this.fb.group({
       name: new FormControl('', [Validators.required]),
@@ -57,6 +59,7 @@ export class DynamicModalComponent implements OnInit {
 
   ngOnInit() {
     this.defaultProductionDate = this.getToday();
+    this.changeDetectorRef.detectChanges();
   }
   
   getToday(): string {
@@ -69,7 +72,8 @@ export class DynamicModalComponent implements OnInit {
   }
 
   closeDialog(): void {
-    window.location.reload()
+    window.location.reload();
+    this.changeDetectorRef.detectChanges();
     this.dialogRef.close();
   }
 
