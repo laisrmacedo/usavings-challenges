@@ -87,7 +87,6 @@ export class GlobalService{
   }
   
   getAllProducts(){
-    console.log(this.apiUrl, '<<<<<<<<<< this.apiUrl');
     return this.http.get<Product[]>(`${this.apiUrl}/product`, {headers: { 'Cache-Control': 'no-store' }})
   }
   

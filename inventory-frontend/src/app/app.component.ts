@@ -35,12 +35,9 @@ export class AppComponent implements OnInit{
 
     this.globalService.getAllProducts().subscribe(
       (res:any) => {
-        console.log(this.globalService.productsData, res,'<<<<<<< 1');
         this.globalService.productsData = res
       }
     )
-
-    console.log(this.globalService.productsData, '<<<<<<< 1');
 
     this.globalService.getAllStocks().subscribe(
       (res:any) => {
