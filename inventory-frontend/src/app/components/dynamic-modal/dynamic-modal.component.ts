@@ -75,6 +75,18 @@ export class DynamicModalComponent implements OnInit {
     window.location.reload();
     this.changeDetectorRef.detectChanges();
     this.dialogRef.close();
+    
+    this.globalService.getAllProducts().subscribe(
+      (res:any) => {
+        this.globalService.productsData = res
+      }
+    )
+
+    this.globalService.getAllStocks().subscribe(
+      (res:any) => {
+        this.globalService.stockData = res
+      }
+    )
   }
 
   onDeleteProduct(id: number): void {
