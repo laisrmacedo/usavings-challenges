@@ -91,14 +91,14 @@ npm run start:dev
 
 #### DEPLOY
  
-[Live Full Stack App](https://usavings-challenges.vercel.app/)
+[Live Full Stack App](https://vitalatte.onrender.com/)
 
 #### CONSTRUÍDO COM
 
 - [Angular](https://v17.angular.io/docs) 
 - [Typescript](https://www.typescriptlang.org/docs/)
 - [CSS](https://devdocs.io/css/)
-- [Vercel](https://vercel.com/)
+- [Render](https://render.com/)
 
 #### INSTALAÇÃ0
 
@@ -143,8 +143,8 @@ cd inventory-backend
 2. Execulte os comandos:
 
 ```
-docker build -t inventory-backend:latest 
-docker run -p 3000:3000 --env-file ./.env inventory-backend:latest`
+docker build -t inventory-backend:latest .
+docker run -p 3000:3000 --env-file ./.env inventory-backend:latest
 ```
 Lembre de ter o arquivo `.env` na pasta `inventory-backend`.
 
@@ -159,8 +159,8 @@ cd inventory-frontend
 2. Execulte os comandos:
 
 ```
-docker build -t inventory-frontend:latest 
-docker run -p 4200:4200 inventory-frontend:latest`
+docker build -t inventory-frontend:latest .
+docker run -p 4200:4200 inventory-frontend:latest
 ```
 
 #### CONFIGURAÇÕES DO DOCKER-COMPOSE
