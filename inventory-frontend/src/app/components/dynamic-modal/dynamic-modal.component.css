@@ -25,28 +25,47 @@
   color: var(--my-black);
 }
 
+.mdc-dialog__actions{
+ margin-bottom: 12px;
+ display: flex;
+ gap: 4px;
+ justify-content: center;
+ align-items: center;
+}
+
+@media screen and (max-width: 650px){
+  .mat-mdc-dialog-actions .mat-button-base+.mat-button-base, .mat-mdc-dialog-actions .mat-mdc-button-base+.mat-mdc-button-base{
+    margin-left: 0;
+  }
+}
+
 input, select{
   text-transform: uppercase;
   font-size: 12px;
   padding: 4px;
 }
 
-.add-btn .mat-dialog-actions .mat-button-base+.mat-button-base, .mat-mdc-dialog-actions .mat-mdc-button-base+.mat-mdc-button-base{
+#delete-modal-btn{
+  background-color: var(--my-red-1);
+  color: var(--my-white);
+}
+
+#add-modal-btn {
   background-color: var(--my-green-1);
   color: var(--my-white);
 }
 
-.delete-btn[_ngcontent-ng-c590421726]   .mat-dialog-actions[_ngcontent-ng-c590421726]   .mat-button-base[_ngcontent-ng-c590421726]    + .mat-button-base[_ngcontent-ng-c590421726], .mat-mdc-dialog-actions[_ngcontent-ng-c590421726]   .mat-mdc-button-base[_ngcontent-ng-c590421726]    + .mat-mdc-button-base[_ngcontent-ng-c590421726]{
+#edit-modal-btn{
   background-color: var(--my-blue-1);
-  color: var(--my-white);
-}
-
-.delete-btn .mat-dialog-actions .mat-button-base+.mat-button-base, .mat-mdc-dialog-actions .mat-mdc-button-base+.mat-mdc-button-base{
-  background-color: var(--my-red-1);
   color: var(--my-white);
 }
 
 .error-message{
   color: red;
   font-size: 12px;
+}
+
+.info-message{
+  color: gray;
+  font-size: 10px;
 }
