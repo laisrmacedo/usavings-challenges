@@ -6,21 +6,33 @@
       <span>
         <label for="name">Nome</label>
         <input type="text" name="name" id="name" formControlName="name" placeholder="Digite o nome do produto"/>
+        <div *ngIf="productErrorMessage">
+          <p class="error-message">{{ productErrorMessage }}</p>
+        </div>
       </span>
       <span>
         <label for="price">Preco Unitário (R$)</label>
         <input type="number" name="price" id="price" formControlName="price"  placeholder="Digite o preço do produto"/>
+        <div *ngIf="createProductForm.get('price')?.invalid && createProductForm.get('price')?.touched">
+          <p class="error-message">Informe o preço de uma unidade do produto.</p>
+        </div>
       </span>
       <span>
         <label for="unit">Unidade de Medida</label>
         <select formControlName="unit">
-          <option style="color: gray;"  disabled>Selecione uma unidade de medida</option>
+          <option style="color: gray;" disabled>Selecione uma unidade de medida</option>
           <option *ngFor="let unit of units" [ngValue]="unit">{{unit}}</option>
+          <div *ngIf="createProductForm.get('unit')?.invalid && createProductForm.get('unit')?.touched">
+            <p class="error-message">Informe a unidade de medida do produto.</p>
+          </div>
         </select>
       </span>
       <span>
         <label for="shelf-_ife">Validade (Dias)</label>
         <input type="number" name="shelf-life" id="shelf_life" formControlName="shelf_life"  placeholder="Digite o prazo de validade do produto"/>
+        <div *ngIf="createProductForm.get('shelf_life')?.invalid && createProductForm.get('shelf_life')?.touched">
+          <p class="error-message">Informe a quantidade de dias que este produto é válido após a data de fabricação.</p>
+        </div>
       </span>
     </div>
     <div class="model-actions" mat-dialog-actions>
@@ -75,12 +87,6 @@
 </ng-container>
 
 <!-- ------------------------------ -->
-<!-- ------------------------------ -->
-<!-- ------------------------------ -->
-<!-- ------------------------------ -->
-<!-- ------------------------------ -->
-<!-- ------------------------------ -->
-<!-- ------------------------------ -->
 
 <!-- Formulário para registro de produtos no estoque -->
 <ng-container *ngIf="data?.type === 'register-stock'">
@@ -108,10 +114,10 @@
         <label for="production_date">Data de Fabricação</label>
         <input type="date" [(ngModel)]="defaultProductionDate"  name="production_date" id="production_date" formControlName="production_date"/>
         <p class="info-message">Se a data de fabricação não for informada, será considerada a data de hoje.</p>
+        <div *ngIf="stockErrorMessage" class="errorMessage">
+          <p class="error-message">{{ stockErrorMessage }}</p>
+        </div>
       </span>
-      <div *ngIf="errorMessage" >
-        {{ errorMessage }}
-      </div>
     </div>
     <div class="model-actions" mat-dialog-actions>
       <button class="cancel-btn" mat-button (click)="closeDialog()">Cancelar</button>
@@ -134,7 +140,6 @@
         <input type="number" name="quantity" id="quantity" formControlName="quantity" placeholder={{data.item.quantity}}/>
       </span>
       <span> 
-        <!-- {{data.item.production_date}} -->
         <label for="production_date">Data de Fabricação</label>
         <input type="date" [(ngModel)]="data.item.production_date"  name="production_date" id="production_date" formControlName="production_date"/>
       </span>

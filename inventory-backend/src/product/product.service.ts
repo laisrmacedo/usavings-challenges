@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm'; // serve para manipular os produtos no banco de dados
 import { Product } from './product.entity';
@@ -18,7 +18,15 @@ export class ProductService {
     return this.productRepository.findOneBy({ id });
   }
 
-  create(product: Product): Promise<Product> {
+  findOneByName(name: string): Promise<Product> {
+    return this.productRepository.findOneBy({ name });
+  }
+
+  async create(product: Product): Promise<Product> {
+    const existingProduct = await this.findOneByName(product.name);
+    if (existingProduct) {
+      throw new BadRequestException('Este produto já está cadastrado.');
+    }
     return this.productRepository.save(product);
   }
 

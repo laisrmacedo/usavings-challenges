@@ -53,7 +53,7 @@ export class DynamicModalComponent implements OnInit {
   productsData: Product[] = this.globalService.productsData
 
   units: any = ['l', 'kg']
-  names: any = this.productsData .map((obj)=> obj.name)
+  names: any = this.productsData.map((obj) => obj.name)
 
   defaultProductionDate: string = ''
 
@@ -61,7 +61,7 @@ export class DynamicModalComponent implements OnInit {
     this.defaultProductionDate = this.getToday();
     this.changeDetectorRef.detectChanges();
   }
-  
+
   getToday(): string {
     const today = new Date();
     const day = String(today.getDate()).padStart(2, '0');
@@ -75,15 +75,15 @@ export class DynamicModalComponent implements OnInit {
     window.location.reload();
     this.changeDetectorRef.detectChanges();
     this.dialogRef.close();
-    
+
     this.globalService.getAllProducts().subscribe(
-      (res:any) => {
+      (res: any) => {
         this.globalService.productsData = res
       }
     )
 
     this.globalService.getAllStocks().subscribe(
-      (res:any) => {
+      (res: any) => {
         this.globalService.stockData = res
       }
     )
@@ -105,21 +105,28 @@ export class DynamicModalComponent implements OnInit {
     })
   }
 
+  productErrorMessage: string | null = null;
+
   onSubmitProduct() {
-    this.globalService.postProduct(this.createProductForm.value).subscribe({
-      next: () => {
-        this.closeDialog()
-      }
-    })
+    this.globalService.postProduct(this.createProductForm.value)
+      .subscribe({
+        error: (error) => {
+          this.productErrorMessage = error.error.message
+          console.log(error)
+        },
+        next: () => {
+          this.closeDialog()
+        }
+      })
   }
 
-  errorMessage: string | null = null;
+  stockErrorMessage: string | null = null;
 
   onSubmitStock() {
     this.globalService.postStock(this.createStockForm.value)
       .subscribe({
         error: (error) => {
-          this.errorMessage = error.errorMessage
+          this.stockErrorMessage = error.error.message
           console.log(error)
         },
         next: () => {

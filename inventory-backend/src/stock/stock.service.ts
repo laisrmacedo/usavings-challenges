@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Stock } from '../stock/stock.entity';
@@ -33,13 +33,13 @@ export class StockService {
   async createStockWithProduct(name: string, quantity: number, production_date: Date): Promise<Stock> {
     const product = await this.productRepository.findOneBy({ name });
     if (!product) {
-      throw new Error('Product not found');
+      throw new BadRequestException('Produto não cadastrado.');
     }
 
     const dueDate = this.addDays(new Date(production_date), product.shelf_life);
 
     if (dueDate < new Date()) {
-      throw new Error('Este produto já está vencido.');
+      throw new BadRequestException('Este produto já está vencido.');
     }
 
     const stock = new Stock();
