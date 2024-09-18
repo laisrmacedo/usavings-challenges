@@ -63,9 +63,13 @@ input, select{
 .error-message{
   color: red;
   font-size: 12px;
+  line-height: normal;
+  margin-top: 6px;
 }
 
 .info-message{
   color: gray;
   font-size: 10px;
+  line-height: normal;
+  margin-top: 6px;
 }
