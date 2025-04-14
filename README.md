@@ -2,7 +2,7 @@
 
 Desafios para candidatos(as) para vagas do time uSavings (Ustore/Claro Brasil)
 
-## 📝 Contexto Persolalizado
+## 📝 Contexto Personalizado
 
 Lucas é um jovem empreendedor e decidiu abrir sua própria empresa, a Vitalatte, com foco na produção de produtos derivados do leite. Ele observou que o processo de gerenciamento de inventário de sua empresa, especialmente no que diz respeito ao monitoramento das datas de validade dos produtos, é frequentemente manual e suscetível a erros. Ele decidiu que seria benéfico desenvolver uma aplicação web que simplificasse essa tarefa, permitindo-o controlar seus produtos de forma mais eficiente e evitar prejuízos decorrentes de produtos vencidos.
 
